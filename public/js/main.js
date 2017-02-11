@@ -24,34 +24,28 @@ $(window).on('load', function() {
   // Create an empty project and a view for the canvas:
   paper.setup(canvas);
   // Create a Paper.js Path to draw a line into it:
-  var path = new paper.Path();
-  // Give the stroke a color
-  path.strokeColor = 'black';
-  var start = new paper.Point(100, 100);
-  // Move to start and draw a line from there
-  path.moveTo(start);
-  // Note that the plus operator on Point objects does not work
-  // in JavaScript. Instead, we need to call the add() function:
-  path.lineTo(start.add([200, -50]));
-  // Draw the view now:
-  paper.view.draw();
-  var myPath;
+  var tool = new Tool();
+  var paths = {};
 
-  function onMouseDown(event) {
-    myPath = new Path();
-    myPath.strokeColor = 'black';
+  // Define a mousedown and mousedrag handler
+  tool.onMouseDown = function(event) {
+    pathname = String(Math.floor(Math.random() * 10000000 + 1));
+    paths[pathname] = new Path();
+    path.strokeColor = 'black';
+    path.add(event.point);
+    socket.emit('path', { name: pathname, point: event.point, color: 'red' });
   }
 
-  function onMouseDrag(event) {
-    myPath.add(event.point);
+  tool.onMouseDrag = function(event) {
+    path.add(event.point);
+    socket.emit('path', { name: pathname, point: event.point, color: 'red' });
   }
 
-  function onMouseUp(event) {
-    var myCircle = new Path.Circle({
-      center: event.point,
-      radius: 10
-    });
-    myCircle.strokeColor = 'black';
-    myCircle.fillColor = 'white';
-  }
+  socket.on('path', function(data) {
+    if (!paths[data.pathname]){
+      paths[pathname] = new Path();
+      paths[pathname].strokeColor = data.color;
+    } 
+    paths[pathname].add(data.point)
+  })
 });
