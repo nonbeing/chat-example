@@ -4,6 +4,10 @@
   "description": "my first socket.io app",
   "dependencies": {
     "express": "4.10.2",
+    "nodemon": "^1.11.0",
     "socket.io": "1.2.0"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
   }
 }
