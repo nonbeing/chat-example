@@ -10,6 +10,10 @@ io.on('connection', function(socket){
     console.log('msg: ' + msg.content + 'from: ' + msg.nick);
     io.emit('chat message', msg);
   });
+  socket.on('path', function(msg) {
+    console.log(msg);
+    socket.broadcast.emit('path', msg);
+  })
 });
 
 http.listen(3000, function(){
