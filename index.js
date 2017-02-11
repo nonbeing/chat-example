@@ -34,7 +34,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('path', function(data) {
-    // console.log("socket data: "+ JSON.stringify(data));
+    console.log("socket data: "+ JSON.stringify(data));
 
     if(!path_history[data.name]) {
       path_history[data.name] = {"points":data.points, "color":data.color}
