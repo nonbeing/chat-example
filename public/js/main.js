@@ -1,7 +1,7 @@
 var socket = io();
 $('form').submit(function() {
   msg = {}
-  msg.nick = name //$('#nick').val()
+  msg.nick = username //$('#nick').val()
   msg.content = $('#m').val()
   socket.emit('chat message', msg);
   $('#m').val('');
@@ -13,7 +13,7 @@ socket.on('chat message', function(msg) {
 });
 
 $("document").ready(function() {
-  name = window.prompt("Enter your nick:", "");
+  username = window.prompt("Enter your nick:", "");
 });
 
 $('#color-input').ColorPicker({
