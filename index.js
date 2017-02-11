@@ -21,6 +21,11 @@ io.on('connection', function(socket){
     io.emit('chat message', msg);
   });
 
+  socket.on('clear', function(data) {
+    console.log("ClearCanvas");
+    io.emit('clear', data);
+  });
+
   socket.on('path', function(data) {
     // console.log("socket data: "+ JSON.stringify(data));
 

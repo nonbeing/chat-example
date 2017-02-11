@@ -25,6 +25,14 @@ $('#color-input').ColorPicker({
 
 paper.install(window);
 
+
+$("#clearcanvas").click(function() {
+  project.clear();
+  socket.emit('clear', {});
+});
+
+
+
 $(window).on('load', function() {
   // Get a reference to the canvas object
   var canvas = document.getElementById('myCanvas');
@@ -49,8 +57,14 @@ $(window).on('load', function() {
     socket.emit('path', { name: pathname, points: [{ x: event.point.x, y: event.point.y }] });
   }
 
+  socket.on('clear', function(data) {
+    console.log("Clearing Canvas...");
+    project.clear();
+  });
+
+
   socket.on('path', function(data) {
-    // console.log("got data:" + JSON.stringify(data))
+    console.log("got data:" + JSON.stringify(data))
 
     var name = data.name;
     var color = data.color;
@@ -64,5 +78,5 @@ $(window).on('load', function() {
       points[i] = new Point(points[i].x, points[i].y);
 
     paths[name].addSegments(points);
-  })
+  });
 });
