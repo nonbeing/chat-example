@@ -6,6 +6,7 @@ const io = require('socket.io')(http);
 app.use(express.static('public'));
 
 var path_history = {}
+var chat_history = []
 
 io.on('connection', function(socket){
   // console.log("New connection, sending path_history: " + JSON.stringify(path_history))
@@ -16,8 +17,14 @@ io.on('connection', function(socket){
     socket.emit('path', path);
   }
 
+  var val;
+  for (val of chat_history) {
+    socket.emit('chat message', val)
+  }
+
   socket.on('chat message', function(msg){
     console.log('msg: "' + msg.content + '", from: ' + msg.nick);
+    chat_history.push(msg)
     io.emit('chat message', msg);
   });
 

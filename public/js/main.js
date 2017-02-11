@@ -1,6 +1,5 @@
 var socket = io();
 $('form').submit(function(e) {
-  debugger;
   msg = {}
   msg.nick = username //$('#nick').val()
   msg.content = $('#m').val()
@@ -8,6 +7,7 @@ $('form').submit(function(e) {
   $('#m').val('');
   return false;
 });
+
 socket.on('chat message', function(msg) {
   line = "<" + msg.nick + "> " + msg.content
   $('#messageList').append($('<li>').text(line));
