@@ -1,5 +1,6 @@
 var socket = io();
-$('form').submit(function() {
+$('form').submit(function(e) {
+  debugger;
   msg = {}
   msg.nick = username //$('#nick').val()
   msg.content = $('#m').val()

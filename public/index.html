@@ -17,20 +17,22 @@
         <button class="btn btn-default button" id="clearcanvas" type="button">Clear</button>
       </div>
       <div class="col-md-4">
-        <div class="row">
-          <span>
+        <span>
             Stroke color:
           </span>
-          <input type="text" maxlength="6" id="color-input" value="#ff0000">
-        </div>
-        <div class="row">
-          <div id="chat">
-            <ul id="messageList"></ul>
-            <form id="messageInput" action="">
-              <input id="m" autocomplete="off" placeholder="message" />
-              <button>Send</button>
-            </form>
-          </div>
+        <input type="text" maxlength="6" id="color-input" value="#ff0000">
+        <div id="chat">
+          <ul id="messageList"></ul>
+          <form id="messageInput" action="">
+            <input id="m" type="text" autocomplete="off" placeholder="message" />
+            <div class="file-upload">
+              <label for="file-input">
+                <img src="images/ic_attachment_black_24dp_2x.png" />
+              </label>
+              <input id="file-input" type="file" />
+            </div>
+            <button>Send</button>
+          </form>
         </div>
       </div>
     </div>
