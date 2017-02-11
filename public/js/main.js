@@ -26,26 +26,27 @@ $(window).on('load', function() {
   // Create a Paper.js Path to draw a line into it:
   var tool = new Tool();
   var paths = {};
+  var pathname;
 
   // Define a mousedown and mousedrag handler
   tool.onMouseDown = function(event) {
     pathname = String(Math.floor(Math.random() * 10000000 + 1));
     paths[pathname] = new Path();
-    path.strokeColor = 'black';
-    path.add(event.point);
-    socket.emit('path', { name: pathname, point: event.point, color: 'red' });
+    paths[pathname].strokeColor = 'black';
+    paths[pathname].add(event.point);
+    socket.emit('path', { name: pathname, point: { x: event.point.x, y: event.point.y }, color: 'black' });
   }
 
   tool.onMouseDrag = function(event) {
-    path.add(event.point);
-    socket.emit('path', { name: pathname, point: event.point, color: 'red' });
+    paths[pathname].add(event.point);
+    socket.emit('path', { name: pathname, point: { x: event.point.x, y: event.point.y }});
   }
 
   socket.on('path', function(data) {
-    if (!paths[data.pathname]){
-      paths[pathname] = new Path();
-      paths[pathname].strokeColor = data.color;
+    if (!paths[data.name]){
+      paths[data.name] = new Path();
+      paths[data.name].strokeColor = data.color;
     } 
-    paths[pathname].add(data.point)
+    paths[data.name].add(new Point(data.point.x, data.point.y));
   })
 });
