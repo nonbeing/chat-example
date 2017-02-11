@@ -60,6 +60,7 @@ $(window).on('load', function() {
     }
     for ( i = 0; i < points.length; i++ )
       points[i] = new Point(points[i].x, points[i].y);
-    paths[name].add(points);
+
+    paths[name].addSegments(points);
   })
 });
