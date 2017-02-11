@@ -9,7 +9,7 @@ $('form').submit(function() {
 });
 socket.on('chat message', function(msg) {
   line = "<" + msg.nick + "> " + msg.content
-  $('#messages').append($('<li>').text(line));
+  $('#messageList').append($('<li>').text(line));
 });
 
 $("document").ready(function() {
@@ -17,14 +17,19 @@ $("document").ready(function() {
 });
 
 $('#color-input').ColorPicker({
-  flat: true,
-  onChange: function (color) {
-    window.paperjsPathColor = { hue: color.h, saturation: color.s / 100, brightness: color.b / 100 };
+  onSubmit: function(hsb, hex, rgb, el) {
+    $(el).val('#'+hex);
+    $(el).ColorPickerHide();
+  },
+  onBeforeShow: function () {
+    $(this).ColorPickerSetColor(this.value);
   }
+})
+.bind('keyup', function(){
+  $(this).ColorPickerSetColor(this.value);
 });
 
 paper.install(window);
-
 
 $("#clearcanvas").click(function() {
   project.clear();
@@ -33,6 +38,7 @@ $("#clearcanvas").click(function() {
 
 
 
+// Fixed layout of chat inputs and moved to a hidden color picker
 $(window).on('load', function() {
   // Get a reference to the canvas object
   var canvas = document.getElementById('myCanvas');
@@ -47,9 +53,9 @@ $(window).on('load', function() {
   tool.onMouseDown = function(event) {
     pathname = String(Math.floor(Math.random() * 10000000 + 1));
     paths[pathname] = new Path();
-    paths[pathname].strokeColor = window.paperjsPathColor || 'black';
+    paths[pathname].strokeColor = $('#color-input').val()
     paths[pathname].add(event.point);
-    socket.emit('path', { name: pathname, points: [{ x: event.point.x, y: event.point.y }], color: window.paperjsPathColor || 'black' });
+    socket.emit('path', { name: pathname, points: [{ x: event.point.x, y: event.point.y }], color: $('#color-input').val() });
   }
 
   tool.onMouseDrag = function(event) {

@@ -17,18 +17,24 @@
         <button class="btn btn-default button" id="clearcanvas" type="button">Clear</button>
       </div>
       <div class="col-md-4">
-        <div id="color-input"></div>
         <div class="row">
-          <ul id="messages"></ul>
+          <span>
+            Stroke color:
+          </span>
+          <input type="text" maxlength="6" id="color-input" value="#ff0000">
         </div>
         <div class="row">
-          <form action="">
-            <input id="m" autocomplete="off" placeholder="message" />
-            <button>Send</button>
-          </form>
+          <div id="chat">
+            <ul id="messageList"></ul>
+            <form id="messageInput" action="">
+              <input id="m" autocomplete="off" placeholder="message" />
+              <button>Send</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>

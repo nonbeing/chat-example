@@ -10,13 +10,6 @@ body {
   font: 13 px Helvetica, Arial;
 }
 
-form {
-  background: #000;
-  padding: 3px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
 
 form input {
   border: 5;
@@ -32,24 +25,47 @@ form button {
   padding: 10px;
 }
 
-.bluediv {
-  background-color: # E1F2F9;
-  padding: 10 px;
-  overflow: auto;
-  border: 1 px solid #888888;
+#chat {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 400px;
+  overflow: hidden;
 }
 
-#messages {
-  list - style - type: none;
+#messageList {
   margin: 0;
   padding: 0;
+  overflow: scroll;
+  flex-grow: 1;
 }
 
-#messages li {
+#messageInput {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: row nowrap;
+  background: #000;
+  padding: 3px;
+  min-height: 50px;
+}
+#messageInput > input {
+  flex-grow: 1
+}
+#messageInput > button {
+  width: 100px;
+}
+
+#messageList li {
   padding: 5 px 10 px;
 }
 
-#messages li: nth - child(odd) {
+#messageList li: nth - child(odd) {
   background: #eee;
 }
 
