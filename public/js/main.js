@@ -16,6 +16,13 @@ $("document").ready(function() {
   name = window.prompt("Enter your nick:", "");
 });
 
+$('#color-input').ColorPicker({
+  flat: true,
+  onChange: function (color) {
+    window.paperjsPathColor = { hue: color.h, saturation: color.s / 100, brightness: color.b / 100 };
+  }
+});
+
 paper.install(window);
 
 $(window).on('load', function() {
@@ -32,21 +39,27 @@ $(window).on('load', function() {
   tool.onMouseDown = function(event) {
     pathname = String(Math.floor(Math.random() * 10000000 + 1));
     paths[pathname] = new Path();
-    paths[pathname].strokeColor = 'black';
+    paths[pathname].strokeColor = window.paperjsPathColor || 'black';
     paths[pathname].add(event.point);
-    socket.emit('path', { name: pathname, point: { x: event.point.x, y: event.point.y }, color: 'black' });
+    socket.emit('path', { name: pathname, points: [{ x: event.point.x, y: event.point.y }], color: window.paperjsPathColor || 'black' });
   }
 
   tool.onMouseDrag = function(event) {
     paths[pathname].add(event.point);
-    socket.emit('path', { name: pathname, point: { x: event.point.x, y: event.point.y }});
+    socket.emit('path', { name: pathname, points: [{ x: event.point.x, y: event.point.y }] });
   }
 
   socket.on('path', function(data) {
-    if (!paths[data.name]){
-      paths[data.name] = new Path();
-      paths[data.name].strokeColor = data.color;
-    } 
-    paths[data.name].add(new Point(data.point.x, data.point.y));
+    var name = data.name;
+    var color = data.color;
+    var points = data.points;
+
+    if (!paths[name]){
+      paths[name] = new Path();
+      paths[name].strokeColor = color;
+    }
+    for ( i = 0; i < points.length; i++ )
+      points[i] = new Point(points[i].x, points[i].y);
+    paths[name].add(points);
   })
 });
