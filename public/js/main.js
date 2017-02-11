@@ -50,6 +50,8 @@ $(window).on('load', function() {
   }
 
   socket.on('path', function(data) {
+    // console.log("got data:" + JSON.stringify(data))
+
     var name = data.name;
     var color = data.color;
     var points = data.points;
