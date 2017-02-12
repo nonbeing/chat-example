@@ -37,7 +37,7 @@ form button {
 }
 
 #messageList {
-  margin: 0;
+  margin: 10;
   padding: 0;
   overflow: scroll;
   flex-grow: 1;
@@ -67,11 +67,7 @@ form button {
   width: 100px;
 }
 
-#messageList li {
-  padding: 5 px 10 px;
-}
-
-#messageList li: nth - child(odd) {
+#messageList li:nth-child(odd) {
   background: #eee;
 }
 

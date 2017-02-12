@@ -29,7 +29,9 @@ io.on('connection', function(socket){
   });
 
   socket.on('clear', function(data) {
-    console.log("ClearCanvas");
+    console.log("ClearAll");
+    path_history = {}
+    chat_history = []
     io.emit('clear', data);
   });
 

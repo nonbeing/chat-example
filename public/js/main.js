@@ -32,8 +32,9 @@ $('#color-input').ColorPicker({
 
 paper.install(window);
 
-$("#clearcanvas").click(function() {
+$("#clearAll").click(function() {
   project.clear();
+  $('#messageList').empty();
   socket.emit('clear', {});
 });
 
@@ -65,8 +66,9 @@ $(window).on('load', function() {
   }
 
   socket.on('clear', function(data) {
-    console.log("Clearing Canvas...");
+    console.log("Clearing All...");
     project.clear();
+    $('#messageList').empty();
   });
 
 
