@@ -20,6 +20,22 @@ All in all, it's pretty amazing that we could complete almost all of the require
 
 JS FTW!
 
+## running
+Install npm deps: `npm install` in the directory containing `package.json`
+
+Start the server: `npm start` in the directory containing `package.json`
+
+You should see something like:
+
+```shell
+[nodemon] starting `node server.js`
+listening on *:3000
+```
+
+Point your browser to `http://localhost:3000` or `http://<your_ip_here>:3000`
+
+Draw! Chat!
+
 ## hackathon: problem statement
 Create a collaborative and real-time whiteboard
 
@@ -37,5 +53,7 @@ e.g. Browser, Java Swing etc.
 1. Participants should be able to work Across Networks (Internet)
 1. Participants should be able transfer a file to each other
 
-File-transfer is not (yet) implemented. To have the app work across the Internet, just need to host it publicly on something like EC2 and use the public IP instead of `<privateip>:3000`.
+File-transfer is not (yet) implemented. 
+
+To have the app work across the Internet, we just needed to host it publicly and access the app at the public IP. There's a [live demo](http://whiteboard.nonbeing.tech) hosted on EC2, for example that works fine.
 
