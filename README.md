@@ -53,7 +53,8 @@ e.g. Browser, Java Swing etc.
 1. Participants should be able to work Across Networks (Internet)
 1. Participants should be able transfer a file to each other
 
-File-transfer is not (yet) implemented. 
+## outcome
+File-transfer is not (yet) implemented. All other requirements and features are done.
 
 To have the app work across the Internet, we just needed to host it publicly and access the app at the public IP. There's a [live demo](http://whiteboard.nonbeing.tech) hosted on EC2, for example that works fine.
 
